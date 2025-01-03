@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaList } from "react-icons/fa";
+import { FaHome, FaList } from "react-icons/fa";
 
 const Menubar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,7 +10,6 @@ const Menubar = () => {
   return (
     <>
       <div className="border-dotted border-[1px] border-gray-300 bg-white p-2 z-50 border-l-0 border-r-0">
-  
         <div className="flex items-center justify-between sm:hidden">
           {/* Menu Icon */}
           <button
@@ -23,15 +22,15 @@ const Menubar = () => {
             <span className="text-sm">মেনু নির্বাচন করুন</span>
           </button>
 
-
           <p className="text-sm text-gray-600">Select your menu</p>
         </div>
 
         {/* Horizontal Menu */}
         <ul className=" hidden sm:flex flex-wrap justify-start sm:justify-center md:justify-start text-blue-700 font-medium gap-2">
-          <li className="hover:underline cursor-pointer px-1 border-r border-dotted border-2 border-l-0 border-t-0 border-b-0 border-gray-400">
-            Home
-          </li>
+        <li className="flex items-center cursor-pointer px-1 hover:bg-blue-100 hover:text-blue-900 transition duration-200">
+              <FaHome className="mr-2" />
+              Home
+            </li>
           <li className="hover:underline cursor-pointer px-1 border-r border-dotted border-2 border-l-0 border-t-0 border-b-0 border-gray-400">
             District Info
           </li>
@@ -64,7 +63,8 @@ const Menubar = () => {
         {/* Vertical Dropdown Menu for Mobile Devices */}
         {isMenuOpen && (
           <ul className="flex flex-col space-y-1 mt-2 sm:hidden text-blue-700 font-medium">
-            <li className="cursor-pointer px-2 py-1 hover:bg-blue-100 hover:text-blue-900 transition duration-200">
+            <li className="flex items-center cursor-pointer px-2 py-1 hover:bg-blue-100 hover:text-blue-900 transition duration-200">
+              <FaHome className="mr-2" />
               Home
             </li>
             <li className="cursor-pointer px-2 py-1 hover:bg-blue-100 hover:text-blue-900 transition duration-200">

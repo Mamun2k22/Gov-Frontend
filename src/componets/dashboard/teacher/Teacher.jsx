@@ -6,6 +6,7 @@ import { toast, ToastContainer } from "react-toastify";
 // import ProductEdit from "./ProductEdit";
 import Loader from "../../../loader/Loader";
 import useLoading from "../../../hooks/useLoading";
+import { AddTeacher } from "./AddTeacher";
 
 const Teacher = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,74 +16,89 @@ const Teacher = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const fetchProducts = async () => {
-      showLoader(); // Show loader before starting the fetch
-      try {
-        const response = await fetch(
-          `https://ecommerce-backend-sand-iota.vercel.app/api/products`
-        );
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        setProducts(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        hideLoader();
-      }
-    };
+ 
+ 
+  // useEffect(() => {
+  //   const fetchProducts = async () => {
+  //     showLoader();
+  //     try {
+  //       const response = await fetch(
+  //         `https://ecommerce-backend-sand-iota.vercel.app/api/products`
+  //       );
+  //       if (!response.ok) {
+  //         throw new Error("Network response was not ok");
+  //       }
+  //       const data = await response.json();
+  //       setProducts(data);
+  //     } catch (err) {
+  //       setError(err.message);
+  //     } finally {
+  //       hideLoader();
+  //     }
+  //   };
 
-    fetchProducts();
-  }, []);
+  //   fetchProducts();
+  // }, []);
 
   const handleEditClick = (product) => {
-    setSelectedProduct(product); // Set the selected product
-    setIsEditModalOpen(true); // Open the modal
+    setSelectedProduct(product);
+    setIsEditModalOpen(true);
   };
 
   const handleCloseModal = () => {
-    setIsEditModalOpen(false); // Close the modal
-    setSelectedProduct(null); // Reset the selected product
+    setIsEditModalOpen(false);
+    setSelectedProduct(null);
   };
 
-  const handleDelete = async (id) => {
-    const confirmed = window.confirm(
-      "Are you sure you want to delete this product?"
-    );
-    if (confirmed) {
-      showLoader();
-      try {
-        const response = await fetch(
-          `https://ecommerce-backend-sand-iota.vercel.app/api/products/${id}`,
-          {
-            method: "DELETE",
-          }
-        );
+  // const handleDelete = async (id) => {
+  //   const confirmed = window.confirm(
+  //     "Are you sure you want to delete this product?"
+  //   );
+  //   if (confirmed) {
+  //     showLoader();
+  //     try {
+  //       const response = await fetch(
+  //         `https://ecommerce-backend-sand-iota.vercel.app/api/products/${id}`,
+  //         {
+  //           method: "DELETE",
+  //         }
+  //       );
 
-        if (!response.ok) {
-          throw new Error("Failed to delete the product");
-        }
+  //       if (!response.ok) {
+  //         throw new Error("Failed to delete the product");
+  //       }
 
-        const result = await response.json();
-        console.log(result.message);
+  //       const result = await response.json();
+  //       console.log(result.message);
 
-        refetch();
-      } catch (error) {
-        console.error("Error deleting product:", error.message);
-      } finally {
-        hideLoader();
-      }
-    }
-  };
+  //       refetch();
+  //     } catch (error) {
+  //       console.error("Error deleting product:", error.message);
+  //     } finally {
+  //       hideLoader();
+  //     }
+  //   }
+  // };
 
   return (
     <div className="p-4">
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-start lg:justify-between gap-16 lg:gap-0">
+        <div className="block lg:hidden text-gray-400 hover:bg-gray-100 px-3 py-2 rounded-lg text-sm font-bold cursor-pointer flex items-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-4 fill-current mr-3"
+            viewBox="0 0 511 511.999"
+          >
+            <path
+              d="M498.7 222.695c-.016-.011-.028-.027-.04-.039L289.805 13.81C280.902 4.902 269.066 0 256.477 0c-12.59 0-24.426 4.902-33.332 13.809L14.398 222.55c-.07.07-.144.144-.21.215-18.282 18.386-18.25 48.218.09 66.558 8.378 8.383 19.44 13.235 31.273 13.746.484.047.969.07 1.457.07h8.32v153.696c0 30.418 24.75 55.164 55.168 55.164h81.711c8.285 0 15-6.719 15-15V376.5c0-13.879 11.293-25.168 25.172-25.168h48.195c13.88 0 25.168 11.29 25.168 25.168V497c0 8.281 6.715 15 15 15h81.711c30.422 0 55.168-24.746 55.168-55.164V303.14h7.719c12.586 0 24.422-4.903 33.332-13.813 18.36-18.367 18.367-48.254.027-66.633zm-21.243 45.422a17.03 17.03 0 0 1-12.117 5.024h-22.72c-8.285 0-15 6.714-15 15v168.695c0 13.875-11.289 25.164-25.168 25.164h-66.71V376.5c0-30.418-24.747-55.168-55.169-55.168H232.38c-30.422 0-55.172 24.75-55.172 55.168V482h-66.71c-13.876 0-25.169-11.29-25.169-25.164V288.14c0-8.286-6.715-15-15-15H48a13.9 13.9 0 0 0-.703-.032c-4.469-.078-8.66-1.851-11.8-4.996-6.68-6.68-6.68-17.55 0-24.234.003 0 .003-.004.007-.008l.012-.012L244.363 35.02A17.003 17.003 0 0 1 256.477 30c4.574 0 8.875 1.781 12.113 5.02l208.8 208.796.098.094c6.645 6.692 6.633 17.54-.031 24.207zm0 0"
+              data-original="#000000"
+            />
+          </svg>
+          All Teacher
+        </div>
         <div className="hidden sm:block">
           {" "}
-          <ul class="bg-white shadow-[0_2px_8px_-1px_rgba(6,81,237,0.4)] p-1 space-x-4 w-max flex items-center rounded-lg mx-auto font-[sans-serif] mt-4">
+          <ul class="bg-white shadow-[0_2px_8px_-1px_rgba(6,81,237,0.4)] p-1 space-x-4 w-max flex items-center rounded-lg mx-auto font-poppins mt-4">
             <li class="text-gray-400 hover:bg-gray-100 px-3 py-2 rounded-lg text-sm font-bold cursor-pointer flex items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -117,22 +133,18 @@ const Teacher = () => {
           </ul>
         </div>
         <div>
-          <button
-            // onClick={() => setIsModalOpen(true)}
-            class="text-white gap-2 bg-blue-500 px-4 py-2.5 rounded-lg text-sm font-bold cursor-pointer flex items-center"
-          >
-            <FaPlus />
-            Add Teacher
-          </button>
-          {/* <AddProduct
+          <AddTeacher
             isOpen={isModalOpen}
             isClose={() => setIsModalOpen(false)}
-          /> */}
+          />
         </div>
+
+
+
       </div>
 
-      {products.map((product, index) => (
-        <div key={index} className="font-poppins lg:mt-10 mt-5">
+    
+        <div  className="font-poppins lg:mt-10 mt-5">
           <div className=" overflow-x-auto">
             <div className="overflow-hidden  border rounded-lg border-gray-300 pb-4">
               <table className="table-auto min-w-full rounded-xl">
@@ -215,27 +227,15 @@ const Teacher = () => {
                     </td>
 
                     <td className="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900">
-                      {new Date(product.updatedAt).toISOString().slice(0, 10)}
+                      {/* {new Date(product.updatedAt).toISOString().slice(0, 10)} */}
+                   
+                   11-22-2024
                     </td>
 
                     <td className="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900">
-                      <div className="py-1.5 px-2.5 bg-emerald-50 rounded-full flex justify-center w-20 items-center gap-1">
-                        <svg
-                          width="5"
-                          height="6"
-                          viewBox="0 0 5 6"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <circle
-                            cx="2.5"
-                            cy="3"
-                            r="2.5"
-                            fill="#059669"
-                          ></circle>
-                        </svg>
+                      <div className="py-1 px-1.5 bg-emerald-50 rounded-full flex justify-center w-20 items-center">
                         <span className="font-medium text-xs text-emerald-600 ">
-                          Active
+                          12334
                         </span>
                       </div>
                     </td>
@@ -273,7 +273,7 @@ const Teacher = () => {
                       </div>
 
                       <button
-                        onClick={() => handleDelete(product._id)}
+                        // onClick={() => handleDelete(product._id)}
                         title="delete"
                         className="p-2 rounded-full bg-white group transition-all duration-500 hover:bg-red-600 flex item-center"
                       >
@@ -299,7 +299,7 @@ const Teacher = () => {
             </div>
           </div>
         </div>
-      ))}
+    
       <ToastContainer
         position="top-center"
         autoClose={2000}

@@ -6,7 +6,7 @@ import Noticeboard from "../componets/dashboard/Noticeboard";
 import TabComponent from "../componets/HorizontalTab.jsx/TabComponent";
 import Teacher from "../componets/dashboard/teacher/Teacher";
 import Student from "../componets/dashboard/student/Student";
-import Profile from "../componets/dashboard/profile/Profile";
+import { Profile } from "../componets/dashboard/profile/Profile";
 
 export const router = createBrowserRouter([
   {

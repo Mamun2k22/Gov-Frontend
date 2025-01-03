@@ -130,7 +130,7 @@ const DashboardLayout = () => {
         )}
       </>
 
-      <div className="flex font-poppins ">
+      <div className="flex font-poppins  bg-white ">
         {/* Dashboard Sidebar */}
         <div
           className={`bg-[#f1f8f3] font-poppins md:block ${
